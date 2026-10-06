@@ -35,5 +35,8 @@ pnpm build
 mkdir -p "$OUTPUT_DIR"
 cp -R dist/. "$OUTPUT_DIR/"
 cp "$ROOT_DIR/_redirects" "$OUTPUT_DIR/_redirects"
+cp "$ROOT_DIR/manifest.webmanifest" "$OUTPUT_DIR/manifest.webmanifest"
+cp "$ROOT_DIR/service-worker.js" "$OUTPUT_DIR/service-worker.js"
+cp "$ROOT_DIR/zvs26-icon.svg" "$OUTPUT_DIR/zvs26-icon.svg"
 
 echo "Full ZVS-26 web client built in $OUTPUT_DIR"
