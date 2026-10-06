@@ -3,3 +3,5 @@
 Cloudflare Pages + D1 web/PWA client for the ЗВС-26 knowledge base.
 
 Production deploy is handled by Cloudflare Pages.
+
+Build watch path: all repository changes.
