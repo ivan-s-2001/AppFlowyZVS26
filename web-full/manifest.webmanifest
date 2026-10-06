@@ -1,0 +1,19 @@
+{
+  "name": "ЗВС-26 · РГАТУ",
+  "short_name": "ЗВС-26",
+  "description": "Закрытый неофициальный портал и база знаний группы ЗВС-26 РГАТУ",
+  "start_url": "/app",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/zvs26-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
