@@ -371,14 +371,14 @@
 				DEVELOPMENT_TEAM = VHB67HRSZG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AppFlowy;
+				INFOPLIST_KEY_CFBundleDisplayName = "ЗВС-26";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.appflowy.appflowy.flutter;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.ivans2001.zvs26;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
@@ -513,14 +513,14 @@
 				DEVELOPMENT_TEAM = VHB67HRSZG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AppFlowy;
+				INFOPLIST_KEY_CFBundleDisplayName = "ЗВС-26";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.appflowy.appflowy.flutter;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.ivans2001.zvs26;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
@@ -550,14 +550,14 @@
 				DEVELOPMENT_TEAM = VHB67HRSZG;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = AppFlowy;
+				INFOPLIST_KEY_CFBundleDisplayName = "ЗВС-26";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.appflowy.appflowy.flutter;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.ivans2001.zvs26;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
