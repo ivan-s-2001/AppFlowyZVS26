@@ -58,6 +58,7 @@ class RgatuPortalSeeder {
       parentId: workspaceId,
       name: _marker,
       markdown: _homeMarkdown,
+      openAfterCreate: true,
     );
 
     await _createDocument(
@@ -316,6 +317,7 @@ class RgatuPortalSeeder {
     required String parentId,
     required String name,
     String? markdown,
+    bool openAfterCreate = false,
   }) async {
     List<int>? initialDataBytes;
 
@@ -330,6 +332,7 @@ class RgatuPortalSeeder {
       parentViewId: parentId,
       name: name,
       initialDataBytes: initialDataBytes,
+      openAfterCreate: openAfterCreate,
     );
 
     return result.fold(
