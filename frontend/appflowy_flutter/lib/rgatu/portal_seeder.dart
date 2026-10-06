@@ -27,6 +27,19 @@ class RgatuPortalSeeder {
     'Основы программирования',
   ];
 
+  static const Map<String, String> _subjectTeachers = {
+    'Экономика': 'Фоменко С.А.',
+    'Культурология': 'Сидорова И.М.',
+    'Математический анализ': 'Авдеева В.В.',
+    'Физическая культура': 'Гайдуков Э.А.',
+    'История России': 'Ферагина Е.А.',
+    'Линейная алгебра и геометрия': 'Бурцев А.И.',
+    'Теоретические основы информатики и ИКТ': 'Сизов П.В.',
+    'Иностранный язык': 'Чижикова Н.В.',
+    'Дискретная математика': 'Гусарова Н.И.',
+    'Основы программирования': 'Каленов А.С.',
+  };
+
   static const List<String> _teachers = [
     'Авдеева В.В.',
     'Бурцев А.И.',
@@ -396,12 +409,14 @@ class RgatuPortalSeeder {
 - важное от преподавателя.
 ''';
 
-  static String _subjectMarkdown(String subject) => '''
+  static String _subjectMarkdown(String subject) {
+    final teacher = _subjectTeachers[subject] ?? 'уточнить';
+    return '''
 # $subject
 
 ## Коротко
 
-**Преподаватель:** заполнить  
+**Преподаватель:** $teacher  
 **Форма аттестации:** заполнить  
 **Что сдаём:** открыть вложенную страницу «📌 Что сдаём»
 
@@ -414,6 +429,7 @@ class RgatuPortalSeeder {
 
 > Не складываем всё на одну страницу: подробные материалы находятся во вложенных разделах.
 ''';
+  }
 
   static const String _requirementsMarkdown = '''
 # Что сдаём
@@ -580,11 +596,17 @@ class RgatuPortalSeeder {
 - важные договорённости.
 ''';
 
-  static String _teacherMarkdown(String teacher) => '''
+  static String _teacherMarkdown(String teacher) {
+    final subjects = _subjectTeachers.entries
+        .where((entry) => entry.value == teacher)
+        .map((entry) => entry.key)
+        .join(', ');
+
+    return '''
 # $teacher
 
-**Предмет(ы):** заполнить  
-**Контакты:** заполнить только если преподаватель дал их группе
+**Предмет(ы):** ${subjects.isEmpty ? 'уточнить' : subjects}  
+**Контакты:** заполняем только если преподаватель дал их группе
 
 ## Как сдавать
 
@@ -598,6 +620,7 @@ class RgatuPortalSeeder {
 
 - Добавить информацию с датой, если требования меняются.
 ''';
+  }
 
   static const String _materialsIndexMarkdown = '''
 # Материалы
