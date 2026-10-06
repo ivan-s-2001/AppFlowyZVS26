@@ -70,9 +70,17 @@ jobs:
         working-directory: frontend/appflowy_flutter
         run: flutter pub get
 
+      - name: Analyze Flutter client
+        working-directory: frontend/appflowy_flutter
+        run: flutter analyze .
+
       - name: Build APK
         working-directory: frontend/appflowy_flutter
-        run: flutter build apk --release --target-platform android-arm64
+        env:
+          ZVS26_CLOUD_URL: ${{ vars.ZVS26_CLOUD_URL }}
+        run: |
+          flutter build apk --release --target-platform android-arm64 \
+            --dart-define=ZVS26_CLOUD_URL="$ZVS26_CLOUD_URL"
 
       - name: Rename APK
         run: |
@@ -135,9 +143,17 @@ jobs:
         working-directory: frontend/appflowy_flutter/ios
         run: pod install
 
+      - name: Analyze Flutter client
+        working-directory: frontend/appflowy_flutter
+        run: flutter analyze .
+
       - name: Build iOS simulator app
         working-directory: frontend/appflowy_flutter
-        run: flutter build ios --simulator --debug
+        env:
+          ZVS26_CLOUD_URL: ${{ vars.ZVS26_CLOUD_URL }}
+        run: |
+          flutter build ios --simulator --debug \
+            --dart-define=ZVS26_CLOUD_URL="$ZVS26_CLOUD_URL"
 
       - name: Package iOS app
         run: |
