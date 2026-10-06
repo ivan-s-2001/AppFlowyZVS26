@@ -1,5 +1,5 @@
 name: appflowy
-description: Unofficial RGATU student portal for schedules, groups, sessions, DKR, teachers and collaborative knowledge.
+description: Private unofficial RGATU portal for the ZVS-26 group: schedule, subjects, DKR, sessions, teachers and shared knowledge.
 publish_to: "none"
 
 version: 0.11.4
