@@ -61,7 +61,32 @@ class RgatuPortalSeeder {
     );
     if (semester != null) {
       for (final subject in _subjects) {
-        await _createDocument(parentId: semester.id, name: subject);
+        final subjectPage = await _createDocument(
+          parentId: semester.id,
+          name: subject,
+        );
+        if (subjectPage != null) {
+          await _createDocument(
+            parentId: subjectPage.id,
+            name: '📌 Что сдаём',
+          );
+          await _createDocument(
+            parentId: subjectPage.id,
+            name: '📝 ДКР и задания',
+          );
+          await _createDocument(
+            parentId: subjectPage.id,
+            name: '📚 Конспекты',
+          );
+          await _createDocument(
+            parentId: subjectPage.id,
+            name: '📎 Материалы',
+          );
+          await _createDocument(
+            parentId: subjectPage.id,
+            name: '💬 Важное от преподавателя',
+          );
+        }
       }
     }
 
@@ -87,7 +112,16 @@ class RgatuPortalSeeder {
       }
     }
 
-    await _createDocument(parentId: workspaceId, name: '📚 Материалы');
+    final materials = await _createDocument(
+      parentId: workspaceId,
+      name: '📚 Материалы',
+    );
+    if (materials != null) {
+      await _createDocument(parentId: materials.id, name: 'Методички');
+      await _createDocument(parentId: materials.id, name: 'Лекции и конспекты');
+      await _createDocument(parentId: materials.id, name: 'Примеры работ');
+      await _createDocument(parentId: materials.id, name: 'Разное');
+    }
 
     final university = await _createDocument(
       parentId: workspaceId,
@@ -111,7 +145,27 @@ class RgatuPortalSeeder {
       await _createDocument(parentId: group.id, name: 'Договорённости');
     }
 
-    await _createDocument(parentId: workspaceId, name: '🗃 Архив');
+    final templates = await _createDocument(
+      parentId: workspaceId,
+      name: '🧩 Шаблоны',
+    );
+    if (templates != null) {
+      await _createDocument(parentId: templates.id, name: 'Карточка предмета');
+      await _createDocument(parentId: templates.id, name: 'Новая ДКР');
+      await _createDocument(parentId: templates.id, name: 'Конспект');
+      await _createDocument(parentId: templates.id, name: 'Карточка преподавателя');
+      await _createDocument(parentId: templates.id, name: 'Объявление группы');
+    }
+
+    final archive = await _createDocument(
+      parentId: workspaceId,
+      name: '🗃 Архив',
+    );
+    if (archive != null) {
+      await _createDocument(parentId: archive.id, name: 'Семестры');
+      await _createDocument(parentId: archive.id, name: 'Старые ДКР');
+      await _createDocument(parentId: archive.id, name: 'Старые материалы');
+    }
 
     Log.info(
       'Private ${RgatuPortalConfig.group} RGATU portal seeded for workspace '
