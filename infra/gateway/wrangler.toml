@@ -1,0 +1,9 @@
+name = "zvs26-cloud-gateway"
+main = "src/index.ts"
+compatibility_date = "2026-10-06"
+
+# Runtime values are intentionally not committed.
+# Configure:
+#   CLOUD_ORIGIN
+#   GOTRUE_ORIGIN
+#   SUPABASE_ANON_KEY
