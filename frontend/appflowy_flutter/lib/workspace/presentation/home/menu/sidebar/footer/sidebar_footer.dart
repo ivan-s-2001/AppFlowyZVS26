@@ -27,12 +27,9 @@ class SidebarFooter extends StatelessWidget {
               return const SidebarToast();
             },
           ),
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        const Row(
           children: [
-            const Expanded(child: SidebarTemplateButton()),
-            _buildVerticalDivider(context),
-            const Expanded(child: SidebarTrashButton()),
+            Expanded(child: SidebarTrashButton()),
           ],
         ),
       ],
