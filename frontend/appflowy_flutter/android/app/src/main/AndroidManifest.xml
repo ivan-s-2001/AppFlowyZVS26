@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-  <application android:label="AppFlowy" android:icon="@mipmap/ic_launcher"
+  <application android:label="ЗВС-26 · РГАТУ" android:icon="@mipmap/ic_launcher"
     android:name="${applicationName}">
     <activity android:name=".MainActivity"
       android:exported="true"
@@ -35,7 +35,7 @@
         <category android:name="android.intent.category.BROWSABLE" />
         <data android:scheme="http" />
         <data android:scheme="https" />
-        <data android:scheme="appflowy-flutter" />
+        <data android:scheme="zvs26-rgatu" />
       </intent-filter>
     </activity>
     <!--

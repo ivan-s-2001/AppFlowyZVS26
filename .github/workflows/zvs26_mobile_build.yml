@@ -1,0 +1,172 @@
+name: ZVS-26 Mobile Build
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/zvs26_mobile_build.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: "3.27.4"
+  RUST_TOOLCHAIN: "1.85.0"
+  CARGO_MAKE_VERSION: "0.37.18"
+
+jobs:
+  android-apk:
+    name: Android APK
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free runner disk
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/share/boost /opt/hostedtoolcache/CodeQL || true
+          docker system prune -af || true
+
+      - name: Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          targets: aarch64-linux-android
+          components: rustfmt
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: frontend/rust-lib
+          prefix-key: zvs26-android
+
+      - name: Build prerequisites
+        working-directory: frontend
+        run: |
+          cargo install --force --locked cargo-make --version ${{ env.CARGO_MAKE_VERSION }}
+          cargo install --force --locked duckscript_cli
+          cargo install --force --locked cargo-ndk --version 3.5.4
+          cargo make appflowy-flutter-deps-tools
+
+      - name: Build Rust mobile core
+        working-directory: frontend
+        run: |
+          cargo make --profile production-android appflowy-core-dev-android
+          cargo make --profile production-android code_generation
+
+      - name: Flutter dependencies
+        working-directory: frontend/appflowy_flutter
+        run: flutter pub get
+
+      - name: Analyze Flutter client
+        working-directory: frontend/appflowy_flutter
+        run: flutter analyze .
+
+      - name: Build APK
+        working-directory: frontend/appflowy_flutter
+        env:
+          ZVS26_CLOUD_URL: ${{ vars.ZVS26_CLOUD_URL }}
+        run: |
+          flutter build apk --release --target-platform android-arm64 \
+            --dart-define=ZVS26_CLOUD_URL="$ZVS26_CLOUD_URL"
+
+      - name: Rename APK
+        run: |
+          cp frontend/appflowy_flutter/build/app/outputs/flutter-apk/app-release.apk             ZVS26-RGATU-android-arm64.apk
+
+      - name: Upload Android artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZVS26-RGATU-Android
+          path: ZVS26-RGATU-android-arm64.apk
+          retention-days: 14
+
+  ios-simulator:
+    name: iOS Simulator App
+    runs-on: macos-14
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+
+      - name: Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: ${{ env.RUST_TOOLCHAIN }}
+          targets: aarch64-apple-ios-sim
+          components: rustfmt
+
+      - name: Rust cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: frontend/rust-lib
+          prefix-key: zvs26-ios-sim
+
+      - name: Build prerequisites
+        working-directory: frontend
+        run: |
+          cargo install --force --locked cargo-make --version ${{ env.CARGO_MAKE_VERSION }}
+          cargo install --force --locked duckscript_cli
+          cargo install cargo-lipo
+          cargo make appflowy-flutter-deps-tools
+
+      - name: Build Rust mobile core
+        working-directory: frontend
+        run: |
+          rustup target add aarch64-apple-ios-sim
+          cargo make --profile development-ios-arm64-sim appflowy-core-dev-ios
+          cargo make --profile development-ios-arm64-sim code_generation
+
+      - name: Flutter dependencies
+        working-directory: frontend/appflowy_flutter
+        run: flutter pub get
+
+      - name: Install CocoaPods
+        working-directory: frontend/appflowy_flutter/ios
+        run: pod install
+
+      - name: Analyze Flutter client
+        working-directory: frontend/appflowy_flutter
+        run: flutter analyze .
+
+      - name: Build iOS simulator app
+        working-directory: frontend/appflowy_flutter
+        env:
+          ZVS26_CLOUD_URL: ${{ vars.ZVS26_CLOUD_URL }}
+        run: |
+          flutter build ios --simulator --debug \
+            --dart-define=ZVS26_CLOUD_URL="$ZVS26_CLOUD_URL"
+
+      - name: Package iOS app
+        run: |
+          cd frontend/appflowy_flutter/build/ios/iphonesimulator
+          ditto -c -k --sequesterRsrc --keepParent Runner.app "$GITHUB_WORKSPACE/ZVS26-RGATU-iOS-Simulator.zip"
+
+      - name: Upload iOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZVS26-RGATU-iOS-Simulator
+          path: ZVS26-RGATU-iOS-Simulator.zip
+          retention-days: 14

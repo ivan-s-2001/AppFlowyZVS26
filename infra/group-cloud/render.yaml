@@ -1,0 +1,56 @@
+services:
+  - type: web
+    name: zvs26-appflowy-cloud
+    runtime: docker
+    plan: free
+    dockerfilePath: ./infra/group-cloud/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: RUST_LOG
+        value: warn
+      - key: APPFLOWY_ENVIRONMENT
+        value: production
+      - key: APPFLOWY_ACCESS_CONTROL
+        value: "true"
+      - key: APPFLOWY_DATABASE_MAX_CONNECTIONS
+        value: "5"
+
+      # External Postgres. Supabase is the intended free provider.
+      - key: APPFLOWY_DATABASE_URL
+        sync: false
+
+      # External Redis. Keep it out of the 512 MB web-service container.
+      - key: APPFLOWY_REDIS_URI
+        sync: false
+
+      # External GoTrue-compatible auth.
+      - key: APPFLOWY_GOTRUE_BASE_URL
+        sync: false
+      - key: APPFLOWY_GOTRUE_JWT_SECRET
+        sync: false
+
+      # External S3-compatible storage.
+      - key: APPFLOWY_S3_USE_MINIO
+        value: "true"
+      - key: APPFLOWY_S3_CREATE_BUCKET
+        value: "false"
+      - key: APPFLOWY_S3_MINIO_URL
+        sync: false
+      - key: APPFLOWY_S3_ACCESS_KEY
+        sync: false
+      - key: APPFLOWY_S3_SECRET_KEY
+        sync: false
+      - key: APPFLOWY_S3_BUCKET
+        value: appflowy
+      - key: APPFLOWY_S3_REGION
+        sync: false
+
+      # Group portal does not need paid AI infrastructure.
+      - key: AI_ENABLED
+        value: "false"
+
+      # Public gateway URL, added after the Cloudflare gateway is deployed.
+      - key: APPFLOWY_BASE_URL
+        sync: false

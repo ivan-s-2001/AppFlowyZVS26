@@ -1,254 +1,154 @@
 {
-    "document": {
-      "type": "editor",
-      "children": [
-        { "type": "cover" },
-        {
-          "type": "text",
-          "attributes": { "subtype": "heading", "heading": "h1" },
-          "delta": [{ "insert": "Welcome to AppFlowy!" }]
+  "document": {
+    "type": "editor",
+    "children": [
+      {
+        "type": "cover"
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "heading",
+          "heading": "h1"
         },
-        {
-          "type": "text",
-          "attributes": { "subtype": "heading", "heading": "h2" },
-          "delta": [{ "insert": "Here are the basics" }]
+        "delta": [
+          {
+            "insert": "ЗВС-26 · РГАТУ"
+          }
+        ]
+      },
+      {
+        "type": "callout",
+        "attributes": {
+          "emoji": "🎓"
         },
-        {
-          "type": "text",
-          "attributes": { "subtype": "checkbox", "checkbox": null },
-          "delta": [{ "insert": "Click anywhere and just start typing." }]
-        },
-        {
-          "type": "text",
-          "attributes": { "subtype": "checkbox", "checkbox": false },
-          "delta": [
-            {
-              "insert": "Highlight ",
-              "attributes": { "backgroundColor": "0x4dffeb3b" }
-            },
-            { "insert": "any text, and use the editing menu to " },
-            { "insert": "style", "attributes": { "italic": true } },
-            { "insert": " " },
-            { "insert": "your", "attributes": { "bold": true } },
-            { "insert": " " },
-            { "insert": "writing", "attributes": { "underline": true } },
-            { "insert": " " },
-            { "insert": "however", "attributes": { "code": true } },
-            { "insert": " you " },
-            { "insert": "like.", "attributes": { "strikethrough": true } }
-          ]
-        },
-        {
-          "type": "text",
-          "attributes": { "subtype": "checkbox", "checkbox": null },
-          "delta": [
-            { "insert": "As soon as you type " },
-            {
-              "insert": "/",
-              "attributes": { "code": true, "color": "0xff00b5ff" }
-            },
-            { "insert": " a menu will pop up. Select " },
-            {
-              "insert": "different types",
-              "attributes": { "backgroundColor": "0x4d9c27b0" }
-            },
-            { "insert": " of content blocks you can add." }
-          ]
-        },
-        {
-          "type": "text",
-          "attributes": { "subtype": "checkbox", "checkbox": null },
-          "delta": [
-            { "insert": "Type " },
-            { "insert": "/", "attributes": { "code": true } },
-            { "insert": " followed by " },
-            { "insert": "/bullet", "attributes": { "code": true } },
-            { "insert": " or " },
-            { "insert": "/num", "attributes": { "code": true } },
-            { "insert": " to create a list.", "attributes": { "code": false } }
-          ]
-        },
-        {
-          "type": "text",
-          "attributes": { "subtype": "checkbox", "checkbox": true },
-          "delta": [
-            { "insert": "Click " },
-            { "insert": "+ New Page", "attributes": { "code": true } },
-            {
-              "insert": " button at the bottom of your sidebar to add a new page."
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "attributes": { "subtype": "checkbox", "checkbox": null },
-          "delta": [
-            { "insert": "Click " },
-            { "insert": "+", "attributes": { "code": true } },
-            { "insert": " next to any page title in the sidebar to " },
-            { "insert": "quickly", "attributes": { "color": "0xff8427e0" } },
-            { "insert": " add a new subpage, " },
-            { "insert": "Document", "attributes": { "code": true } },
-            { "insert": ", ", "attributes": { "code": false } },
-            { "insert": "Grid", "attributes": { "code": true } },
-            { "insert": ", or ", "attributes": { "code": false } },
-            { "insert": "Kanban Board", "attributes": { "code": true } },
-            { "insert": ".", "attributes": { "code": false } }
-          ]
-        },
-        { "type": "text", "delta": [] },
-        { "type": "divider" },
-        { "type": "text", "attributes": { "checkbox": null }, "delta": [] },
-        {
-          "type": "text",
-          "attributes": {
-            "subtype": "heading",
-            "checkbox": null,
-            "heading": "h2"
-          },
-          "delta": [{ "insert": "Keyboard shortcuts, markdown, and code block" }]
-        },
-        {
-          "type": "text",
-          "attributes": {
-            "subtype": "number-list",
-            "number": 1,
-            "heading": null
-          },
-          "delta": [
-            { "insert": "Keyboard shortcuts " },
-            {
-              "insert": "guide",
-              "attributes": {
-                "href": "https://appflowy.gitbook.io/docs/essential-documentation/shortcuts"
+        "children": [
+          {
+            "type": "text",
+            "delta": [
+              {
+                "insert": "Закрытый неофициальный портал нашей группы. Без общего сервера РГАТУ и без расписания."
               }
-            },
-            { "retain": 1, "attributes": { "strikethrough": true } }
-          ]
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "heading",
+          "heading": "h2"
         },
-        {
-          "type": "text",
-          "attributes": {
-            "subtype": "number-list",
-            "number": 2,
-            "heading": null
-          },
-          "delta": [
-            { "insert": "Markdown " },
-            {
-              "insert": "reference",
-              "attributes": {
-                "href": "https://appflowy.gitbook.io/docs/essential-documentation/markdown"
-              }
-            },
-            { "retain": 1, "attributes": { "strikethrough": true } }
-          ]
+        "delta": [
+          {
+            "insert": "Что здесь храним"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "bulleted-list"
         },
-        {
-          "type": "text",
-          "attributes": { "number": 3, "subtype": "number-list" },
-          "delta": [
-            { "insert": "Type " },
-            { "insert": "/code", "attributes": { "code": true } },
-            {
-              "insert": " to insert a code block",
-              "attributes": { "code": false }
-            }
-          ]
+        "delta": [
+          {
+            "insert": "1 семестр → предметы → конспекты, методички, файлы и полезные ссылки."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "bulleted-list"
         },
-        {
-          "type": "text",
-          "attributes": {
-            "subtype": "code_block",
-            "number": 3,
-            "heading": null,
-            "number-list": null,
-            "theme": "vs",
-            "language": "rust"
-          },
-          "delta": [
-            {
-              "insert": "// This is the main function.\nfn main() {\n    // Print text to the console.\n    println!(\"Hello World!\");\n}"
-            },
-            { "retain": 1, "attributes": { "strikethrough": true } }
-          ]
+        "delta": [
+          {
+            "insert": "ДКР и задания — требования, темы, дедлайны и готовые материалы."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "bulleted-list"
         },
-        { "type": "text", "attributes": { "checkbox": null }, "delta": [] },
-        {
-          "type": "text",
-          "attributes": {
-            "subtype": "heading",
-            "checkbox": null,
-            "heading": "h2"
-          },
-          "delta": [{ "insert": "Have a question❓" }]
+        "delta": [
+          {
+            "insert": "Сессии — установочная, экзаменационная, зачёты и экзамены."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "bulleted-list"
         },
-        {
-          "type": "text",
-          "attributes": { "subtype": "quote" },
-          "delta": [
-            { "insert": "Click " },
-            { "insert": "?", "attributes": { "code": true } },
-            { "insert": " at the bottom right for help and support." }
-          ]
+        "delta": [
+          {
+            "insert": "Преподаватели — предметы, требования, контакты и договорённости."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "bulleted-list"
         },
-        { "type": "text", "delta": [] },
-        {
-          "type": "callout",
-          "children": [
-            { "type": "text", "delta": [] },
-            {
-              "type": "text",
-              "attributes": { "subtype": "heading", "heading": "h2" },
-              "delta": [{ "insert": "Like AppFlowy? Follow us:" }]
-            },
-            {
-              "type": "text",
-              "attributes": { "subtype": "bulleted-list" },
-              "delta": [
-                {
-                  "insert": "GitHub",
-                  "attributes": {
-                    "href": "https://github.com/AppFlowy-IO/AppFlowy"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "attributes": { "subtype": "bulleted-list" },
-              "delta": [
-                {
-                  "insert": "Twitter",
-                  "attributes": { "href": "https://twitter.com/appflowy" }
-                },
-                { "insert": ": @appflowy" }
-              ]
-            },
-            {
-              "type": "text",
-              "attributes": { "subtype": "bulleted-list" },
-              "delta": [
-                {
-                  "insert": "Newsletter",
-                  "attributes": { "href": "https://blog-appflowy.ghost.io/" }
-                }
-              ]
-            }
-          ],
-          "attributes": { "emoji": "😀" }
+        "delta": [
+          {
+            "insert": "РГАТУ — ЛК1, ЛК2, ФЗО, корпуса и полезные официальные ссылки."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "bulleted-list"
         },
-        { "type": "text", "delta": [] },
-        {
-          "type": "text",
-          "attributes": { "subtype": null, "heading": null },
-          "delta": []
+        "delta": [
+          {
+            "insert": "Наша группа — участники, объявления и общие договорённости."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "heading",
+          "heading": "h2"
         },
-        {
-          "type": "text",
-          "attributes": { "subtype": null, "heading": null },
-          "delta": []
-        }
-      ]
-    }
+        "delta": [
+          {
+            "insert": "Правило"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "delta": [
+          {
+            "insert": "Чат — чтобы поговорить. Портал — чтобы не потерять знания и быстро найти нужное через месяц или через несколько лет."
+          }
+        ]
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "type": "text",
+        "attributes": {
+          "subtype": "quote"
+        },
+        "delta": [
+          {
+            "insert": "Это неофициальный проект группы ЗВС-26, не официальный сервис РГАТУ."
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "delta": []
+      }
+    ]
   }
+}

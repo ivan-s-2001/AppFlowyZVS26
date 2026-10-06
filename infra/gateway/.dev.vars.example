@@ -1,0 +1,3 @@
+CLOUD_ORIGIN=https://zvs26-appflowy-cloud.example
+GOTRUE_ORIGIN=https://PROJECT.supabase.co/auth/v1
+SUPABASE_ANON_KEY=replace_me

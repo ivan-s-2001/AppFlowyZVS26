@@ -17,7 +17,7 @@
 			<string>en</string>
 		</array>
 		<key>CFBundleName</key>
-		<string>AppFlowy</string>
+		<string>ЗВС-26 · РГАТУ</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -31,7 +31,7 @@
 				<string></string>
 				<key>CFBundleURLSchemes</key>
 				<array>
-					<string>appflowy-flutter</string>
+					<string>zvs26-rgatu</string>
 				</array>
 			</dict>
 		</array>
@@ -47,14 +47,13 @@
 			<true />
 		</dict>
 		<key>NSPhotoLibraryUsageDescription</key>
-		<string>AppFlowy needs access to your photos to let you add images to your documents</string>
+		<string>ЗВС-26 · РГАТУ использует доступ к фото, чтобы добавлять изображения в материалы базы знаний</string>
 		<key>NSPhotoLibraryAddUsageDescription</key>
-		<string>AppFlowy needs access to your photos to let you add images to your photo library</string>
+		<string>ЗВС-26 · РГАТУ использует доступ к фото, чтобы сохранять изображения из базы знаний</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
 		<key>NSCameraUsageDescription</key>
-		<string>AppFlowy needs access to your camera to let you add images to your documents from
-			camera</string>
+		<string>ЗВС-26 · РГАТУ использует камеру, чтобы добавлять фотографии в материалы базы знаний</string>
 		<key>UILaunchStoryboardName</key>
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>

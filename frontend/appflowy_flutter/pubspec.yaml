@@ -1,7 +1,5 @@
 name: appflowy
-description: Bring projects, wikis, and teams together with AI. AppFlowy is an
-  AI collaborative workspace where you achieve more without losing control of
-  your data. The best open source alternative to Notion.
+description: Private unofficial RGATU portal for the ZVS-26 group: schedule, subjects, DKR, sessions, teachers and shared knowledge.
 publish_to: "none"
 
 version: 0.11.4

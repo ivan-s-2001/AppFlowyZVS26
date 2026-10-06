@@ -46,20 +46,29 @@ class SidebarTopMenu extends StatelessWidget {
   }
 
   Widget _buildLogoIcon(BuildContext context) {
-    if (Platform.isMacOS) {
-      return const SizedBox.shrink();
-    }
-
-    final svgData = Theme.of(context).brightness == Brightness.dark
-        ? FlowySvgs.app_logo_with_text_dark_xl
-        : FlowySvgs.app_logo_with_text_light_xl;
-
     return Padding(
-      padding: const EdgeInsets.only(top: 12.0, left: 8),
-      child: FlowySvg(
-        svgData,
-        size: const Size(92, 17),
-        blendMode: null,
+      padding: const EdgeInsets.only(top: 10.0, left: 8),
+      child: Text.rich(
+        TextSpan(
+          children: [
+            TextSpan(
+              text: 'ЗВС-26',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: -0.4,
+                  ),
+            ),
+            TextSpan(
+              text: '  ·  РГАТУ',
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: Theme.of(context).hintColor,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ],
+        ),
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:appflowy/user/application/user_listener.dart';
 import 'package:appflowy/workspace/application/view/view_ext.dart';
+import 'package:appflowy/rgatu/portal_seeder.dart';
 import 'package:appflowy_backend/log.dart';
 import 'package:appflowy_backend/protobuf/flowy-folder/view.pb.dart';
 import 'package:appflowy_backend/protobuf/flowy-folder/workspace.pb.dart'
@@ -31,6 +34,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (event, emit) async {
         await event.map(
           initial: (_Initial value) {
+            unawaited(
+              RgatuPortalSeeder.ensureSeeded(workspaceSetting.workspaceId),
+            );
+
             Future.delayed(const Duration(milliseconds: 300), () {
               if (!isClosed) {
                 add(HomeEvent.didReceiveWorkspaceSetting(workspaceSetting));

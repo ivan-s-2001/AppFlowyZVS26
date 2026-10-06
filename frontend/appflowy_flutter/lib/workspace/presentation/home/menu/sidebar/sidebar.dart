@@ -405,9 +405,6 @@ class _SidebarState extends State<_Sidebar> {
             ),
             const VSpace(8),
 
-            _renderUpgradeSpaceButton(menuHorizontalInset),
-            _buildUpgradeApplicationButton(menuHorizontalInset),
-
             const VSpace(8),
             Padding(
               padding: menuHorizontalInset +

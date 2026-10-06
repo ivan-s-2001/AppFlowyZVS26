@@ -1,5 +1,4 @@
 import 'package:appflowy/features/workspace/logic/workspace_bloc.dart';
-import 'package:appflowy/generated/flowy_svgs.g.dart';
 import 'package:appflowy/generated/locale_keys.g.dart';
 import 'package:appflowy/shared/loading.dart';
 import 'package:appflowy/workspace/application/home/home_setting_bloc.dart';
@@ -356,12 +355,7 @@ class _SideBarSwitchWorkspaceButtonChild extends StatelessWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () {
-          context.read<UserWorkspaceBloc>().add(
-                UserWorkspaceEvent.fetchWorkspaces(),
-              );
-          popoverController.show();
-        },
+        onTap: () {},
         behavior: HitTestBehavior.opaque,
         child: SizedBox(
           height: 30,
@@ -388,7 +382,7 @@ class _SideBarSwitchWorkspaceButtonChild extends StatelessWidget {
               const HSpace(6),
               Flexible(
                 child: FlowyText.medium(
-                  currentWorkspace.name,
+                  'ЗВС-26 · РГАТУ',
                   color:
                       isHover ? Theme.of(context).colorScheme.onSurface : null,
                   overflow: TextOverflow.ellipsis,
@@ -396,14 +390,6 @@ class _SideBarSwitchWorkspaceButtonChild extends StatelessWidget {
                   fontSize: 15.0,
                 ),
               ),
-              if (isHover) ...[
-                const HSpace(4),
-                FlowySvg(
-                  FlowySvgs.workspace_drop_down_menu_show_s,
-                  color:
-                      isHover ? Theme.of(context).colorScheme.onSurface : null,
-                ),
-              ],
             ],
           ),
         ),

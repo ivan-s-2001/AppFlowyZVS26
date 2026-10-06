@@ -1,0 +1,32 @@
+name: ZVS-26 Full Web Build
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "web-full/**"
+      - ".github/workflows/zvs26_web_build.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build pinned AppFlowy Web
+        env:
+          ZVS26_CLOUD_URL: https://zvs26-build.invalid
+        run: bash web-full/build.sh
+
+      - name: Upload web artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ZVS26-RGATU-Web
+          path: web-full/dist
+          retention-days: 14
