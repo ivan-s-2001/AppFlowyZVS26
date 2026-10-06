@@ -40,6 +40,15 @@ Future<void> _setAuthenticatorType(AuthenticatorType ty) async {
 
 const String kAppflowyCloudUrl = "https://beta.appflowy.cloud";
 
+/// Optional private cloud endpoint baked into ZVS-26 release builds.
+///
+/// Pass with:
+/// --dart-define=ZVS26_CLOUD_URL=https://your-private-host.example
+///
+/// When absent, the ZVS-26 fork starts in local mode instead of silently
+/// connecting to the public AppFlowy cloud.
+const String kZvs26CloudUrl = String.fromEnvironment('ZVS26_CLOUD_URL');
+
 /// Retrieves the currently set cloud type.
 ///
 /// This method fetches the cloud type setting from the key-value storage
@@ -54,12 +63,15 @@ const String kAppflowyCloudUrl = "https://beta.appflowy.cloud";
 Future<AuthenticatorType> getAuthenticatorType() async {
   final value = await getIt<KeyValueStorage>().get(KVKeys.kCloudType);
   if (value == null && !integrationMode().isUnitTest) {
-    // if the cloud type is not set, then set it to AppFlowy Cloud as default.
-    await useAppFlowyBetaCloudWithURL(
-      kAppflowyCloudUrl,
-      AuthenticatorType.appflowyCloud,
-    );
-    return AuthenticatorType.appflowyCloud;
+    if (kZvs26CloudUrl.trim().isNotEmpty) {
+      await useSelfHostedAppFlowyCloud(kZvs26CloudUrl.trim());
+      return AuthenticatorType.appflowyCloudSelfHost;
+    }
+
+    // The private ZVS-26 fork must never fall back to the public AppFlowy
+    // cloud without an explicit configuration.
+    await useLocalServer();
+    return AuthenticatorType.local;
   }
 
   switch (value ?? "0") {
@@ -72,11 +84,12 @@ Future<AuthenticatorType> getAuthenticatorType() async {
     case "4":
       return AuthenticatorType.appflowyCloudDevelop;
     default:
-      await useAppFlowyBetaCloudWithURL(
-        kAppflowyCloudUrl,
-        AuthenticatorType.appflowyCloud,
-      );
-      return AuthenticatorType.appflowyCloud;
+      if (kZvs26CloudUrl.trim().isNotEmpty) {
+        await useSelfHostedAppFlowyCloud(kZvs26CloudUrl.trim());
+        return AuthenticatorType.appflowyCloudSelfHost;
+      }
+      await useLocalServer();
+      return AuthenticatorType.local;
   }
 }
 
