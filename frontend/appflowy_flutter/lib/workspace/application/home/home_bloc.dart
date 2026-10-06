@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:appflowy/user/application/user_listener.dart';
 import 'package:appflowy/workspace/application/view/view_ext.dart';
-import 'package:appflowy/zvs26/knowledge_base_seeder.dart';
+import 'package:appflowy/rgatu/portal_seeder.dart';
 import 'package:appflowy_backend/log.dart';
 import 'package:appflowy_backend/protobuf/flowy-folder/view.pb.dart';
 import 'package:appflowy_backend/protobuf/flowy-folder/workspace.pb.dart'
@@ -35,7 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await event.map(
           initial: (_Initial value) {
             unawaited(
-              Zvs26KnowledgeBaseSeeder.ensureSeeded(workspaceSetting.workspaceId),
+              RgatuPortalSeeder.ensureSeeded(workspaceSetting.workspaceId),
             );
 
             Future.delayed(const Duration(milliseconds: 300), () {
