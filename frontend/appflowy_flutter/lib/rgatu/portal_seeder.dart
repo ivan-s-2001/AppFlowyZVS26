@@ -3,16 +3,16 @@ import 'package:appflowy/workspace/application/view/view_service.dart';
 import 'package:appflowy_backend/log.dart';
 import 'package:appflowy_backend/protobuf/flowy-folder/protobuf.dart';
 
-/// Seeds the RGATU student portal on first workspace open.
+/// Seeds the private ZVS-26 RGATU workspace once.
 ///
-/// ZVS-26 is the pilot profile, but the structure is intentionally group-agnostic:
-/// group selection/sync can replace [RgatuPortalConfig.defaultGroup] later.
+/// This application is intentionally single-group. There is no group picker,
+/// multi-tenant university portal or schedule module here.
 class RgatuPortalSeeder {
   const RgatuPortalSeeder._();
 
-  static const String _marker = '🎓 РГАТУ Студент';
+  static const String _marker = '🎓 ЗВС-26 · РГАТУ';
 
-  static const List<String> _pilotSubjects = [
+  static const List<String> _subjects = [
     'Экономика',
     'Культурология',
     'Математический анализ',
@@ -25,7 +25,7 @@ class RgatuPortalSeeder {
     'Основы программирования',
   ];
 
-  static const List<String> _pilotTeachers = [
+  static const List<String> _teachers = [
     'Авдеева В.В.',
     'Бурцев А.И.',
     'Гайдуков Э.А.',
@@ -45,7 +45,7 @@ class RgatuPortalSeeder {
     final alreadySeeded = allViewsResult.fold(
       (views) => views.items.any((view) => view.name == _marker),
       (error) {
-        Log.error('RGATU portal seeder: failed to read views: ${error.msg}');
+        Log.error('ZVS-26 portal seeder: failed to read views: ${error.msg}');
         return true;
       },
     );
@@ -53,41 +53,19 @@ class RgatuPortalSeeder {
     if (alreadySeeded) return;
 
     await _createDocument(parentId: workspaceId, name: _marker);
+    await _createDocument(parentId: workspaceId, name: '📢 Важное');
 
-    await _createDocument(
+    final semester = await _createDocument(
       parentId: workspaceId,
-      name: '👤 Профиль · ${RgatuPortalConfig.defaultGroup}',
+      name: '1️⃣ 1 семестр',
     );
-
-    final schedule = await _createDocument(
-      parentId: workspaceId,
-      name: '📅 Расписание',
-    );
-    if (schedule != null) {
-      await _createDocument(parentId: schedule.id, name: 'По группе');
-      await _createDocument(parentId: schedule.id, name: 'По преподавателю');
-      await _createDocument(parentId: schedule.id, name: 'Изменения расписания');
-    }
-
-    final group = await _createDocument(
-      parentId: workspaceId,
-      name: '👥 Моя группа · ${RgatuPortalConfig.defaultGroup}',
-    );
-
-    if (group != null) {
-      final semester = await _createDocument(
-        parentId: group.id,
-        name: '1️⃣ 1 семестр',
-      );
-      if (semester != null) {
-        for (final subject in _pilotSubjects) {
-          await _createDocument(parentId: semester.id, name: subject);
-        }
+    if (semester != null) {
+      for (final subject in _subjects) {
+        await _createDocument(parentId: semester.id, name: subject);
       }
-
-      await _createDocument(parentId: group.id, name: '📢 Объявления группы');
-      await _createDocument(parentId: group.id, name: '📎 Материалы группы');
     }
+
+    await _createDocument(parentId: workspaceId, name: '📝 ДКР и задания');
 
     final sessions = await _createDocument(
       parentId: workspaceId,
@@ -99,47 +77,45 @@ class RgatuPortalSeeder {
       await _createDocument(parentId: sessions.id, name: 'Зачёты и экзамены');
     }
 
-    await _createDocument(parentId: workspaceId, name: '📝 ДКР и задания');
-
     final teachers = await _createDocument(
       parentId: workspaceId,
       name: '👨‍🏫 Преподаватели',
     );
     if (teachers != null) {
-      for (final teacher in _pilotTeachers) {
+      for (final teacher in _teachers) {
         await _createDocument(parentId: teachers.id, name: teacher);
       }
     }
 
-    final campus = await _createDocument(
+    await _createDocument(parentId: workspaceId, name: '📚 Материалы');
+
+    final university = await _createDocument(
       parentId: workspaceId,
-      name: '🏫 Корпуса и аудитории',
+      name: '🏫 РГАТУ',
     );
-    if (campus != null) {
-      await _createDocument(parentId: campus.id, name: 'Главный корпус');
-      await _createDocument(parentId: campus.id, name: 'Корпус 1');
-      await _createDocument(parentId: campus.id, name: 'Корпус 3');
-      await _createDocument(parentId: campus.id, name: 'Как читать номер аудитории');
+    if (university != null) {
+      await _createDocument(parentId: university.id, name: 'ЛК1');
+      await _createDocument(parentId: university.id, name: 'ЛК2');
+      await _createDocument(parentId: university.id, name: 'ФЗО');
+      await _createDocument(parentId: university.id, name: 'Корпуса и аудитории');
+      await _createDocument(parentId: university.id, name: 'Полезные ссылки');
     }
 
-    final accounts = await _createDocument(
+    final group = await _createDocument(
       parentId: workspaceId,
-      name: '🔐 Личные кабинеты и сервисы',
+      name: '👥 Наша группа',
     );
-    if (accounts != null) {
-      await _createDocument(parentId: accounts.id, name: 'ЛК1');
-      await _createDocument(parentId: accounts.id, name: 'ЛК2');
-      await _createDocument(parentId: accounts.id, name: 'Сайт РГАТУ');
-      await _createDocument(parentId: accounts.id, name: 'ФЗО');
+    if (group != null) {
+      await _createDocument(parentId: group.id, name: 'Участники');
+      await _createDocument(parentId: group.id, name: 'Объявления');
+      await _createDocument(parentId: group.id, name: 'Договорённости');
     }
 
-    await _createDocument(parentId: workspaceId, name: '📚 Общая база знаний');
-    await _createDocument(parentId: workspaceId, name: '📎 Общие материалы');
     await _createDocument(parentId: workspaceId, name: '🗃 Архив');
 
     Log.info(
-      'RGATU student portal seeded for workspace $workspaceId; '
-      'pilot group: ${RgatuPortalConfig.defaultGroup}',
+      'Private ${RgatuPortalConfig.group} RGATU portal seeded for workspace '
+      '$workspaceId',
     );
   }
 
@@ -156,7 +132,7 @@ class RgatuPortalSeeder {
     return result.fold(
       (view) => view,
       (error) {
-        Log.error('RGATU portal seeder: failed to create "$name": ${error.msg}');
+        Log.error('ZVS-26 portal seeder: failed to create "$name": ${error.msg}');
         return null;
       },
     );
